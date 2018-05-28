@@ -25,14 +25,14 @@ class CategoryController extends Controller
         } else {
             $categories = Category::paginate(10);
         }
-        return view('categories.index', ['categories' => $categories]);
+        return view('admin.categories.index', ['categories' => $categories]);
     }
 
     public function create()
     {
         $categories = Category::all();
 
-        return view('categories.create', ['categories' => $categories]);
+        return view('admin.categories.index', ['categories' => $categories]);
     }
 
     public function createSave(Request $rq)
@@ -75,7 +75,7 @@ class CategoryController extends Controller
 
             if ($check) {
                 Session::flash('success', 'New category\'s been successfully added');
-                return redirect('categories');
+                return redirect('admin/categories');
             } else {
                 Session::flash('error', 'Failed to add new category');
                 return redirect()->back();
@@ -137,7 +137,7 @@ class CategoryController extends Controller
 
             if($check) {
                 Session::flash('success', 'Category\'s been successfully edited');
-                return redirect('categories');
+                return redirect('admin/categories');
             } else {
                 Session::flash('error', 'Failed to edit category');
                 return redirect()->back();
@@ -151,12 +151,10 @@ class CategoryController extends Controller
         $check = $deleteCategory->delete();
         if($check) {
             Session::flash('success', 'Category\'s been successfully deleted');
-            return redirect('categories');
+            return redirect('admin/categories');
         } else {
             Session::flash('error', 'Failed to delete category');
-            return redirect('categories');
+            return redirect('admin/categories');
         }
-
-        return redirect('categories');
     }
 }

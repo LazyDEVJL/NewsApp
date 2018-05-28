@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@include('layouts.register-body-top')
+@extends('layouts.admin.app')
+<body class="hold-transition register-page">
 @section('content')
     <div class="register-box">
         <div class="register-logo">

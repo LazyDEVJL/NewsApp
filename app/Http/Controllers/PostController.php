@@ -27,7 +27,7 @@ class PostController extends Controller
             $posts = Post::paginate(10);
         }
 
-        return view('posts.index', ['posts' => $posts]);
+        return view('admin.posts.index', ['posts' => $posts]);
     }
 
     public function create()
@@ -35,7 +35,7 @@ class PostController extends Controller
         $posts = Post::all();
         $categories = Category::all();
 
-        return view('posts.create', [
+        return view('admin.posts.create', [
             'posts' => $posts,
             'categories' => $categories,
             ]);
@@ -47,7 +47,6 @@ class PostController extends Controller
             'txt_title'=>'required',
             'txt_slug'=>'required',
             'thumbnail' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-            'txt_position'=>'required',
             'sl_category_id'=>'required|integer',
             'txt_description'=>'required',
             'txt_content'=>'required'
@@ -59,7 +58,6 @@ class PostController extends Controller
             'thumbnail.required'=>'Post\'s thumbnail is required',
             'thumbnail.image'=>'Post\'s thumbnail must be an image',
             'thumbnail.max'=>'Post\'s thumbnail must be smaller than 2MB',
-            'txt_position.required'=>'Post\'s position is required',
             'sl_category_id.required'=>'Post\'s category is not chosen',
             'sl_category_id.integer'=>'Post\'s category is not chosen',
             'txt_description.required'=>'Post\'s description is required',
@@ -73,7 +71,6 @@ class PostController extends Controller
         } else {
             $title = $rq->txt_title;
             $slug = $rq->txt_slug;
-            $position = $rq->txt_position;
             $categoryId = $rq->sl_category_id;
             $description = $rq->txt_description;
             $content = $rq->txt_content;
@@ -86,7 +83,6 @@ class PostController extends Controller
             $post->title = $title;
             $post->slug = $slug;
             $post->thumbnail = $thumbnail;
-            $post->position = $position;
             $post->category_id = $categoryId;
             $post->description = $description;
             $post->content = $content;
@@ -94,7 +90,7 @@ class PostController extends Controller
 
             if($check) {
                 Session::flash('success', 'New post\'s been successfully added');
-                return redirect('posts');
+                return redirect('admin/posts');
             } else {
                 Session::flash('error', 'Failed to add new post');
                 return redirect()->back();
@@ -108,7 +104,7 @@ class PostController extends Controller
         $categories = Category::all();
         $currentPost = Post::where('id', $id)->get();
 
-        return view('posts.edit', [
+        return view('admin.posts.edit', [
             'posts' => $posts,
             'categories' => $categories,
             'currentPost' => $currentPost->first()
@@ -121,7 +117,6 @@ class PostController extends Controller
             'txt_title'=>'required',
             'txt_slug'=>'required',
             'thumbnail' => 'image|mimes:jpg,jpeg,png|max:2048',
-            'txt_position'=>'required',
             'sl_category_id'=>'required|integer',
             'txt_description'=>'required',
             'txt_content'=>'required'
@@ -132,7 +127,6 @@ class PostController extends Controller
             'txt_slug.required'=>'Post\'s slug is required',
             'thumbnail.image'=>'Post\'s thumbnail must be an image',
             'thumbnail.max'=>'Post\'s thumbnail must be smaller than 2MB',
-            'txt_position.required'=>'Post\'s position is required',
             'sl_category_id.required'=>'Post\'s category is not chosen',
             'sl_category_id.integer'=>'Post\'s category is not chosen',
             'txt_description.required'=>'Post\'s description is required',
@@ -149,7 +143,6 @@ class PostController extends Controller
     
             $title = $rq->txt_title;
             $slug = $rq->txt_slug;
-            $position = $rq->txt_position;
             $categoryId = $rq->sl_category_id;
             $description = $rq->txt_description;
             $content = $rq->txt_content;
@@ -167,7 +160,6 @@ class PostController extends Controller
             $editPost->title = $title;
             $editPost->slug = $slug;
             $editPost->thumbnail = $thumbnail;
-            $editPost->position = $position;
             $editPost->category_id = $categoryId;
             $editPost->description = $description;
             $editPost->content = $content;
@@ -176,7 +168,7 @@ class PostController extends Controller
 
             if($check) {
                 Session::flash('success', 'Post\'s been successfully edited');
-                return redirect('posts');
+                return redirect('admin/posts');
             } else {
                 Session::flash('error', 'Failed to edit post');
                 return redirect()->back();
@@ -192,12 +184,10 @@ class PostController extends Controller
 
         if($check) {
             Session::flash('success', 'Post\'s been successfully deleted');
-            return redirect('posts');
+            return redirect('admin/posts');
         } else {
             Session::flash('error', 'Failed to delete post');
             return redirect()->back();
         }
-
-        return redirect('posts');
     }
 }

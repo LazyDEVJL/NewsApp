@@ -15,12 +15,21 @@ if (!function_exists('getParentCategory')) {
     }    
 }
 
-if (!function_exists('getCategoryName'))
+if (!function_exists('getCategoryColumn'))
 {
-    function getCategoryName($id)
+    function getCategoryColumn($id, $key)
     {
         $category = Category::find($id);
-        return $category['name'];
+
+        switch($key)
+        {
+            case 'name':
+                return $category['name'];
+                break;
+            case 'slug':
+                return $category['slug'];
+                break;
+        }
     }
 }
 
@@ -32,8 +41,8 @@ if(!function_exists('insertImage'))
 
         $fileName = $file->getClientOriginalName();
 
-        $path = $file->move(base_path('resources/views/posts/images'), $fileName);
-        $thumbnail = 'resources/views/posts/images/'.$fileName;
+        $file->move(base_path('resources/views/admin/posts/images'), $fileName);
+        $thumbnail = 'resources/views/admin/posts/images/'.$fileName;
         return $thumbnail;
     }
 }

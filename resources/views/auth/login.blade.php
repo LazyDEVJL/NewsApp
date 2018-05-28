@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@include('layouts.login-body-top')
+@extends('layouts.admin.app')
+<body class="hold-transition login-page">
 @section('content')
     <div class="login-box">
         <div class="login-logo">

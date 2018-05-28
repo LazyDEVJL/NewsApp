@@ -16,8 +16,8 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function admin()
     {
-        return redirect('categories');
+        return redirect('admin/categories');
     }
 }
