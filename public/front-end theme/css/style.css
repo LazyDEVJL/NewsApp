@@ -1373,10 +1373,10 @@ textarea.input {
 	transition:0.5s all;
 }
 
-#back-to-top:after {
-	content:"\f106";
-	font-family:FontAwesome;
-}
+/*#back-to-top:after {*/
+	/*content:"\f106";*/
+	/*font-family:FontAwesome;*/
+/*}*/
 
 #back-to-top:hover {
 	background-color:#EF233C;

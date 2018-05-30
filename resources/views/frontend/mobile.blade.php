@@ -358,6 +358,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- /FOOTER -->
 
     <!-- Back to top -->
-    <div id="back-to-top"></div>
+    <div id="back-to-top">
+        <span><i class="fa fa-arrow-circle-up"></i></span>
+    </div>
     <!-- Back to top -->
 @endsection
