@@ -51,7 +51,6 @@
                                 <th>Title</th>
                                 <th>Slug</th>
                                 <th>Thumbnail</th>
-                                <th>Position</th>
                                 <th>Description</th>
                                 <th>Content</th>
                                 <th>Category</th>
@@ -63,13 +62,12 @@
                                 <td>{{ $post->title }}</td>
                                 <td>{{ str_limit($post->slug, 50) }}</td>
                                 <td><img src="{{ $post->thumbnail }}" alt="{{ $post->title }}" width="200"></td>
-                                <td>{{ $post->position }}</td>
-                                <td>{{ str_limit(removePTag($post->description), 120) }}</td> 
-                                <td>{{ str_limit(removePTag($post->content), 120) }}</td>
+                                <td>{!! str_limit($post->description) !!}</td>
+                                <td>{!! str_limit($post->content) !!}</td>
                                 <td>{{ getCategoryColumn($post->category_id, 'name') }}</td>
                                 <td>
                                     <a href="{{ action('PostController@edit', ['id' => $post->id]) }}" class="btn btn-light"><i class="fa fa-edit"></i></a>
-                                    <a href="{{ action('PostController@destroy', ['id' => $post->id]) }}"onclick="return confirm('Are you sure?');" class="btn btn-danger"><i class="fa fa-trash-alt"></i></a>
+                                    <a href="{{ action('PostController@destroy', ['id' => $post->id]) }}" onclick="return confirm('Are you sure?');" class="btn btn-danger"><i class="fa fa-trash-alt"></i></a>
                                 </td>
                             </tr>
                             @endforeach

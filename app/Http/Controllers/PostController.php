@@ -22,9 +22,9 @@ class PostController extends Controller
 
         if(isset($keywords))
         {
-            $posts = Post::where('title', 'like', "%$keywords%")->paginate(10);
+            $posts = Post::where('title', 'like', "%$keywords%")->orderBy('created_at', 'desc')->paginate(10);
         } else {
-            $posts = Post::paginate(10);
+            $posts = Post::orderBy('created_at', 'desc')->paginate(10);
         }
 
         return view('admin.posts.index', ['posts' => $posts]);
@@ -67,7 +67,7 @@ class PostController extends Controller
         $validator = Validator::make($rq->all(), $rules, $messages);
 
         if($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withInput()->withErrors($validator);
         } else {
             $title = $rq->txt_title;
             $slug = $rq->txt_slug;
@@ -93,7 +93,7 @@ class PostController extends Controller
                 return redirect('admin/posts');
             } else {
                 Session::flash('error', 'Failed to add new post');
-                return redirect()->back();
+                return redirect()->back()->withInput();
             }
         }
     }
@@ -136,7 +136,7 @@ class PostController extends Controller
         $validator = Validator::make($rq->all(), $rules, $messages);
 
         if($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withInput()->withErrors($validator);
         } else {
             $id = $rq->txt_id;
             $editPost = Post::find($id);
@@ -171,7 +171,7 @@ class PostController extends Controller
                 return redirect('admin/posts');
             } else {
                 Session::flash('error', 'Failed to edit post');
-                return redirect()->back();
+                return redirect()->back()->withInput();
             }
         }
     }

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Session;
 use Validator;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -32,7 +32,7 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
 
-        return view('admin.categories.index', ['categories' => $categories]);
+        return view('admin.categories.create', ['categories' => $categories]);
     }
 
     public function createSave(Request $rq)
@@ -57,7 +57,7 @@ class CategoryController extends Controller
         $validator = Validator::make($rq->all(), $rules, $messages);
 
         if($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withInput()->withErrors($validator);
         } else {
             $name = $rq->txt_name;
             $slug = $rq->txt_slug;
@@ -78,7 +78,7 @@ class CategoryController extends Controller
                 return redirect('admin/categories');
             } else {
                 Session::flash('error', 'Failed to add new category');
-                return redirect()->back();
+                return redirect()->back()->withInput();
             }
         }
     }
@@ -119,7 +119,7 @@ class CategoryController extends Controller
         $validator = Validator::make($rq->all(), $rules, $messages);
 
         if($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withInput()->withErrors($validator);
         } else {
             $name = $rq->txt_name;
             $slug = $rq->txt_slug;
@@ -140,7 +140,7 @@ class CategoryController extends Controller
                 return redirect('admin/categories');
             } else {
                 Session::flash('error', 'Failed to edit category');
-                return redirect()->back();
+                return redirect()->back()->withInput();
             }
         }
     }

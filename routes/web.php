@@ -19,7 +19,6 @@ Route::auth();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/admin', 'HomeController@admin');
 
-Route::get('/', 'FrontEndController@index')->name('home');
 /**
  * Route lists for categories
  */
@@ -40,3 +39,12 @@ Route::get('/admin/posts/edit/{id}', 'PostController@edit');
 Route::post('/admin/posts/edit-save', 'PostController@editSave');
 Route::get('/admin/posts/destroy/{id}', 'PostController@destroy');
 
+
+/**
+ *Route lists for front-end
+ */
+Route::get('/', 'FrontEndController@index')->name('home');
+Route::get('/mobile', 'FrontEndController@mobile')->name('mobile');
+Route::get('/kham-pha', 'FrontEndController@kham-pha')->name('kham-pha');
+Route::get('/cong-nghe-thong-tin', 'FrontEndController@cong-nghe-thong-tin')->name('cong-nghe-thong-tin');
+Route::get('/internet', 'FrontEndController@internet')->name('internet');

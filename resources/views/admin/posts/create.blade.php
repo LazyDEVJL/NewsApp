@@ -30,20 +30,20 @@
                         <div class="form-row">
                             <div class="form-group col-lg-12">
                                 <label for="title">Title</label>
-                                <input type="text" name="txt_title" id="title" class="form-control">
+                                <input type="text" name="txt_title" id="title" class="form-control" value="{{old('txt_title')}}">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-lg-6">
                                 <label for="slug">Slug</label>
-                                <input type="text" name="txt_slug" id="slug" class="form-control">
+                                <input type="text" name="txt_slug" id="slug" class="form-control" readonly value="{{old('txt_slug')}}">
                             </div>
                             <div class="form-group col-lg-3">
                                 <label for="parent_category">Category</label>
                                 <select id="parent_category" class="form-control" name="sl_category_id">
                                     <option value="">Choose..</option>
                                     @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option value="{{ $category->id }} {{$category->id == old('sl_category_id') ? 'check' : ''}}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -55,13 +55,13 @@
                         <div class="form-row">
                             <div class="form-group col-lg-12">
                                 <label for="description">Description</label>
-                                <textarea name="txt_description" id="description"></textarea>
+                                <textarea name="txt_description" id="description" rows="10" cols="100">{{old('txt_description')}}</textarea>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-lg-12">
                                 <label for="content">Content</label>
-                                <textarea name="txt_content" id="content"></textarea>
+                                <textarea name="txt_content" id="content" rows="10" cols="100">{{old('txt_content')}}</textarea>
                             </div>
                         </div>
                     </div>    
@@ -88,6 +88,6 @@
         <!-- Control sidebar content goes here -->
     </aside>
     <!-- /.control-sidebar -->
-    </div>
 <!-- ./wrapper -->
+
 @endsection

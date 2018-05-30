@@ -20,7 +20,7 @@
         <!-- Main content -->
         <section class="content">
             @include('admin.messages')
-            <div class="card card-info w-50">
+            <div class="card card-info w-75">
                 <div class="card-header">
                     <h3 class="card-title">Edit Post</h3>
                 </div>

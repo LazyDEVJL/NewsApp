@@ -28,7 +28,7 @@ if (!function_exists('getCategoryColumn'))
                 break;
             case 'slug':
                 return $category['slug'];
-                break;
+            break;
         }
     }
 }
@@ -86,5 +86,21 @@ if(!function_exists('removePTag'))
         $removeFinal = str_replace($p2, '', $removeP1);
 
         return $removeFinal;
+    }
+}
+
+if(!function_exists('getIconByCategorySlug'))
+{
+    function getIconBySlug($slug)
+    {
+        $class = '';
+        switch ($slug)
+        {
+            case 'mobile':
+                $class = 'fa-mobile-alt';
+                break;
+        }
+
+        return $class;
     }
 }

@@ -32,7 +32,7 @@ Table OF Contents
 	typography
 \*----------------------------*/
 body {
-	font-family: 'Lato', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	color:#2C2C2C;
 	font-size:15px;
 	font-weight:300;
@@ -42,6 +42,7 @@ h1,h2,h3,h4,h5,h6 {
 	font-family: 'Open Sans', sans-serif;
 	color: #07090C;
 	font-weight:700;
+    line-height: 1.4;
 }
 
 h1 {
@@ -515,6 +516,28 @@ textarea.input {
 	display:block;
 }
 
+.article-crl {
+	height: 750px;
+}
+
+.article-post {
+	height: 300px;
+}
+
+.featureAll-thumb {
+	height: 350px;
+}
+
+.article-crl, .article-post, .featureAll-thumb {
+	display: flex;
+	overflow: hidden;
+}
+
+.article-crl img, .article-post img, .featureAll-thumb img {
+	flex-grow: 1;
+	object-fit: cover;
+}
+
 .article .article-img > a:after {
 	content:"";
 	position:absolute;
@@ -626,17 +649,6 @@ textarea.input {
 	margin-bottom:0px;
 }
 
-.article-carousel {
-    display: flex;
-    height: 750px;
-    overflow: hidden;
-}
-
-.article-carousel img {
-    flex-grow: 1;
-    object-fit: cover;
-}
-
 .article.thumb-article .article-img {
 	margin-bottom:0px;
 }
@@ -724,6 +736,7 @@ textarea.input {
 
 @media only screen and (max-width: 480px) {
 	.article.row-article .article-img {
+        width: 100%;
 		float:none;
 		margin-bottom:15px;
 	}
@@ -1312,6 +1325,9 @@ textarea.input {
 		top:15px;
 		left:15px;
 	}
+    .featureAll-thumb {
+        height: 300px;
+    }
 }
 
 @media only screen and (max-width: 480px) {

@@ -34,7 +34,7 @@
                             </div>
                             <div class="form-group col-lg-6">
                                 <label for="slug">Slug</label>
-                                <input type="text" name="txt_slug" id="slug" class="form-control">
+                                <input type="text" name="txt_slug" id="slug" class="form-control" readonly>
                             </div>
                         </div>
                         <div class="form-row">
@@ -54,6 +54,7 @@
                                 <label for="parent_category">Parent Category</label>
                                 <select id="parent_category" class="form-control" name="sl_parent_id">
                                     <option value="">Choose..</option>
+                                    <option value="0">Highest Grade</option>
                                     @foreach($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
