@@ -23,7 +23,7 @@
                                 {{getCategoryColumn($postDetail[0]->category_id,'name')}}
                             </a>
                         </li>
-                        <li>{{$postDetail[0]->title}}</li>
+                        <li>{{str_limit($postDetail[0]->title, 80)}}</li>
                     </ul>
                     <!-- /breadcrumb -->
 

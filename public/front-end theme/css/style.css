@@ -35,7 +35,7 @@ body {
 	font-family: 'Roboto', sans-serif;
 	color:#2C2C2C;
 	font-size:15px;
-	font-weight:300;
+	font-weight:400;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -540,6 +540,11 @@ textarea.input {
 	position:relative;
 	margin-bottom:30px;
 	font-style: normal !important;
+}
+
+.article p {
+	font-size: 16px;
+	line-height: 1.8;
 }
 
 .article .article-img > a {
