@@ -1,7 +1,7 @@
 <!-- FOOTER -->
 <footer id="footer">
     <!-- Bottom Footer -->
-    <div id="bottom-footer" class="section">
+    <div id="bottom-footer" class="section" style="padding-bottom: 30px">
         <!-- CONTAINER -->
         <div class="container">
             <!-- ROW -->
@@ -12,8 +12,8 @@
                         <span>
                             Copyright &copy;
                             <script>document.write(new Date().getFullYear());</script>
-                            Made with <i class="fa fa-heart"></i>
-                            and <i class="fa fa-coffee"></i>
+                            Made with &nbsp;<i class="fa fa-heart"></i>&nbsp;
+                            and &nbsp;<i class="fa fa-coffee"></i>&nbsp;
                             by <strong>Luu Tuan Minh</strong>
                         </span>
                     </div>
