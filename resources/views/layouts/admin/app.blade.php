@@ -31,7 +31,7 @@
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('back-end theme/dist/js/demo.js') }}"></script>
     <!-- CKEditor -->
-    <script src="{{ asset('back-end theme/bower_components/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('back-end theme/bower_components/ckeditor/build/ckeditor.js') }}"></script>
     <!-- User Script -->
     <script src="{{ asset('back-end theme/js/user.js') }}"></script>
 </body>

@@ -44,7 +44,9 @@ Route::get('/admin/posts/destroy/{id}', 'PostController@destroy');
  *Route lists for front-end
  */
 Route::get('/', 'FrontEndController@index')->name('home');
-Route::get('/mobile', 'FrontEndController@mobile')->name('mobile');
-Route::get('/kham-pha', 'FrontEndController@kham-pha')->name('kham-pha');
-Route::get('/cong-nghe-thong-tin', 'FrontEndController@cong-nghe-thong-tin')->name('cong-nghe-thong-tin');
-Route::get('/internet', 'FrontEndController@internet')->name('internet');
+
+Route::get('/search', 'FrontEndController@search');
+
+Route::get('/{category}', 'FrontEndController@category');
+
+Route::get('/{category}/{slug}', 'FrontEndController@postDetail');

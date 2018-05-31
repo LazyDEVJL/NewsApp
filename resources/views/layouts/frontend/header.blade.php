@@ -20,9 +20,9 @@
                     <a href="#" class="logo"><img src="{{asset('front-end theme/img/logo-alt.png')}}" alt=""></a>
                 </div>
                 <ul class="main-nav nav navbar-nav">
-                    <li class="{{$slug == '/' ? 'active' : ''}}"><a href="#">Home</a></li>
+                    <li class="{{$categoryParam == '/' ? 'active' : ''}}"><a href="{{route('home')}}">Home</a></li>
                     @foreach($categories as $category)
-                        <li class="{{$slug == $category->slug ? 'active' : ''}}"><a href="{{route($category->slug)}}">{{$category->name}}</a></li>
+                        <li class="{{$categoryParam == $category->slug ? 'active' : ''}}"><a href="{{action('FrontEndController@category', ['category' => $category->slug])}}">{{$category->name}}</a></li>
                     @endforeach
                 </ul>
             </nav>
@@ -30,7 +30,7 @@
                 <button class="search-collapse-btn"><i class="fa fa-search"></i></button>
                 <button class="nav-collapse-btn"><i class="fa fa-bars"></i></button>
                 <div class="search-form">
-                    <form>
+                    <form action="{{action('FrontEndController@search')}}" method="get">
                         <input class="input" type="text" name="search" placeholder="Search">
                     </form>
                 </div>

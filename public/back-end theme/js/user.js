@@ -1,6 +1,7 @@
 /** 
  * CKEditor for Post Description
  */
+
 ClassicEditor
     .create( document.querySelector( '#description' ) )
     .then( editor => {
@@ -31,8 +32,8 @@ $("#name").keyup(function() {
     str = str.toLowerCase();
 
     // remove accents
-    var from = "àáảãạâấậăắặđèéẽẻẹêếềễểệìíĩỉịòóõỏọôồốỗổộơờớỡởợùúũủụừứữửựỳýỹỷỵ·/_,:;";
-    var to   = "aaaaaaaaaaadeeeeeeeeeeeiiiiiooooooooooooooooouuuuuuuuuuyyyyy------";
+    var from = "àáảãạâấậăắẳặđèéẽẻẹêếềễểệìíĩỉịòóõỏọôồốỗổộơờớỡởợùúũủụừứữửựỳýỹỷỵ·/_,:;";
+    var to   = "aaaaaaaaaaaadeeeeeeeeeeeiiiiiooooooooooooooooouuuuuuuuuuyyyyy------";
     for (var i=0, l=from.length ; i<l ; i++) {
         str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
     }

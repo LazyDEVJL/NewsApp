@@ -99,6 +99,47 @@ if(!function_exists('getIconByCategorySlug'))
             case 'mobile':
                 $class = 'fa-mobile-alt';
                 break;
+
+            case 'cong-nghe-thong-tin':
+                $class = 'fa-code';
+                break;
+
+            case 'internet':
+                $class = 'fa-laptop';
+                break;
+
+            case 'kham-pha':
+                $class = 'fa-search';
+                break;
+        }
+
+        return $class;
+    }
+}
+
+if(!function_exists('getThumbnailByCategorySlug'))
+{
+    function getThumbnailByCategorySlug($slug)
+    {
+        $parallax = 'parallax';
+        $class = '';
+        switch ($slug)
+        {
+            case 'mobile':
+                $class = $parallax.'-mobile';
+                break;
+
+            case 'cong-nghe-thong-tin':
+                $class = $parallax.'-cntt';
+                break;
+
+            case 'internet':
+                $class = $parallax.'-internet';
+                break;
+
+            case 'kham-pha':
+                $class = $parallax.'-khampha';
+                break;
         }
 
         return $class;

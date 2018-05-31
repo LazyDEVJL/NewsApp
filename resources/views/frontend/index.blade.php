@@ -1,1044 +1,429 @@
 @extends('layouts.frontend.app')
 @section('content')
-<!-- Header -->
-<header id="header">
-    <!-- Center Header -->
-    <div id="center-header">
-        <div class="container">
-            <div class="header-logo">
-                <a href="{{route('home')}}" class="logo"><img src="{{ asset('front-end theme/img/logo.png')}}" alt=""></a>
-            </div>
-            <div class="header-ads">
-                <img class="center-block" src="{{ asset('front-end theme/img/ad-2.jpg')}}" alt="">
-            </div>
-        </div>
+    @include('layouts.frontend.header')
+
+    <!-- Owl Carousel 1 -->
+    <div id="owl-carousel-1" class="owl-carousel owl-theme center-owl-nav">
+    @foreach($featurePostAlls as $featurePostAll)
+        <!-- ARTICLE -->
+            <article class="article thumb-article">
+                <div class="article-img article-crl">
+                    <img src="{{$featurePostAll->thumbnail}}" alt="{{$featurePostAll->title}}">
+                </div>
+                <div class="article-body">
+                    <ul class="article-info">
+                        <li class="article-category">
+                            <a href="{{ action('FrontEndController@category', ['category' => getCategoryColumn($featurePostAll->category_id,'slug')])}}">
+                                {{getCategoryColumn($featurePostAll->category_id,'name')}}
+                            </a>
+                        </li>
+                        <li class="article-type">
+                            <i class="fa {{getIconBySlug(getCategoryColumn($featurePostAll->category_id,'slug'))}}"></i>
+                        </li>
+                    </ul>
+                    <h2 class="article-title">
+                        <a href="{{ action('FrontEndController@postDetail', ['category' => getCategoryColumn($featurePostAll->category_id,'slug'), 'slug' => $featurePostAll->slug]) }}">
+                            {{str_limit($featurePostAll->title, 80)}}
+                        </a>
+                    </h2>
+                    <ul class="article-meta">
+                        <li>
+                            <i class="fa fa-clock-o"></i>
+                            {{\Carbon\Carbon::parse($featurePostAll->created_at)->format('F d, Y')}}
+                        </li>
+                    </ul>
+                </div>
+            </article>
+            <!-- /ARTICLE -->
+        @endforeach
     </div>
-    <!-- /Center Header -->
+    <!-- /Owl Carousel 1 -->
 
-    <!-- Nav Header -->
-    <div id="nav-header">
+    <!-- SECTION -->
+    <div class="section">
+        <!-- CONTAINER -->
         <div class="container">
-            <nav id="main-nav">
-                <div class="nav-logo">
-                    <a href="#" class="logo"><img src="{{ asset('front-end theme/img/logo-alt.png')}}" alt=""></a>
-                </div>
-                <ul class="main-nav nav navbar-nav">
-                    <li class="active"><a href="{{route('home')}}">Home</a></li>
-                    @foreach($categories as $category)
-                    <li><a href="{{$category->slug}}">{{$category->name}}</a></li>
-                    @endforeach
-                </ul>
-            </nav>
-            <div class="button-nav">
-                <button class="search-collapse-btn"><i class="fa fa-search"></i></button>
-                <button class="nav-collapse-btn"><i class="fa fa-bars"></i></button>
-                <div class="search-form">
-                    <form>
-                        <input class="input" type="text" name="search" placeholder="Search">
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /Nav Header -->
-</header>
-<!-- /Header -->
-
-<!-- Owl Carousel 1 -->
-<div id="owl-carousel-1" class="owl-carousel owl-theme center-owl-nav">
-    @foreach($featurePosts as $featurePost)
-    <!-- ARTICLE -->
-    <article class="article thumb-article">
-        <div class="article-img article-carousel">
-            <img src="{{$featurePost->thumbnail}}" alt="{{$featurePost->title}}">
-        </div>
-        <div class="article-body">
-            <ul class="article-info">
-                <li class="article-category"><a href="{{getCategoryColumn($featurePost->category_id, 'slug')}}">{{getCategoryColumn($featurePost->category_id, 'name')}}</a></li>
-            </ul>
-            <h2 class="article-title"><a href="{{$featurePost->slug}}">{{$featurePost->title}}</a></h2>
-            <ul class="article-meta">
-                <li><i class="fa fa-clock-o"></i> {{$createdDate}}</li>
-            </ul>
-        </div>
-    </article>
-    <!-- /ARTICLE -->
-    @endforeach
-</div>
-<!-- /Owl Carousel 1 -->
-
-<!-- SECTION -->
-<div class="section">
-    <!-- CONTAINER -->
-    <div class="container">
-        <!-- ROW -->
-        <div class="row">
-            <!-- Main Column -->
-            <div class="col-md-8">
-                <!-- row -->
-                <div class="row">
-                    <!-- Column 1 -->
-                    <div class="col-md-6 col-sm-6">
-                        <!-- section title -->
-                        <div class="section-title">
-                            <h2 class="title">News</h2>
-                        </div>
-                        <!-- /section title -->
-
-                        <!-- ARTICLE -->
-                        <article class="article">
-                            <div class="article-img">
-                                <a href="#">
-                                    <img src="{{ asset('front-end theme/img/img-sm-1.jpg')}}" alt="">
-                                </a>
-                                <ul class="article-info">
-                                    <li class="article-type"><i class="fa fa-camera"></i></li>
-                                </ul>
-                            </div>
-                            <div class="article-body">
-                                <h3 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h3>
-                                <ul class="article-meta">
-                                    <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                    <li><i class="fa fa-comments"></i> 33</li>
-                                </ul>
-                                <p>Populo tritani laboramus ex mei, no eum iuvaret ceteros euripidis, ne alia sadipscing
-                                    mei. Te inciderint cotidieque pro, ei iisque docendi qui, ne accommodare
-                                    theophrastus reprehendunt vel. Et commodo menandri eam.</p>
-                            </div>
-                        </article>
-                        <!-- /ARTICLE -->
-
-                        <!-- ARTICLE -->
-                        <article class="article widget-article">
-                            <div class="article-img">
-                                <a href="#">
-                                    <img src="{{ asset('front-end theme/img/img-widget-7.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="article-body">
-                                <h4 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h4>
-                                <ul class="article-meta">
-                                    <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                    <li><i class="fa fa-comments"></i> 33</li>
-                                </ul>
-                            </div>
-                        </article>
-                        <!-- /ARTICLE -->
-
-                        <!-- ARTICLE -->
-                        <article class="article widget-article">
-                            <div class="article-img">
-                                <a href="#">
-                                    <img src="{{ asset('front-end theme/img/img-widget-8.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="article-body">
-                                <h4 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h4>
-                                <ul class="article-meta">
-                                    <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                    <li><i class="fa fa-comments"></i> 33</li>
-                                </ul>
-                            </div>
-                        </article>
-                        <!-- /ARTICLE -->
-                    </div>
-                    <!-- /Column 1 -->
-
-                    <!-- Column 2 -->
-                    <div class="col-md-6 col-sm-6">
-                        <!-- section title -->
-                        <div class="section-title">
-                            <h2 class="title">Sport</h2>
-                        </div>
-                        <!-- /section title -->
-
-                        <!-- ARTICLE -->
-                        <article class="article">
-                            <div class="article-img">
-                                <a href="#">
-                                    <img src="{{ asset('front-end theme/img/img-sm-2.jpg')}}" alt="">
-                                </a>
-                                <ul class="article-info">
-                                    <li class="article-type"><i class="fa fa-file-text"></i></li>
-                                </ul>
-                            </div>
-                            <div class="article-body">
-                                <h3 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h3>
-                                <ul class="article-meta">
-                                    <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                    <li><i class="fa fa-comments"></i> 33</li>
-                                </ul>
-                                <p>Populo tritani laboramus ex mei, no eum iuvaret ceteros euripidis, ne alia sadipscing
-                                    mei. Te inciderint cotidieque pro, ei iisque docendi qui, ne accommodare
-                                    theophrastus reprehendunt vel. Et commodo menandri eam.</p>
-                            </div>
-                        </article>
-                        <!-- /ARTICLE -->
-
-                        <!-- ARTICLE -->
-                        <article class="article widget-article">
-                            <div class="article-img">
-                                <a href="#">
-                                    <img src="{{ asset('front-end theme/img/img-widget-9.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="article-body">
-                                <h4 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h4>
-                                <ul class="article-meta">
-                                    <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                    <li><i class="fa fa-comments"></i> 33</li>
-                                </ul>
-                            </div>
-                        </article>
-                        <!-- /ARTICLE -->
-
-                        <!-- ARTICLE -->
-                        <article class="article widget-article">
-                            <div class="article-img">
-                                <a href="#">
-                                    <img src="{{ asset('front-end theme/img/img-widget-10.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="article-body">
-                                <h4 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h4>
-                                <ul class="article-meta">
-                                    <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                    <li><i class="fa fa-comments"></i> 33</li>
-                                </ul>
-                            </div>
-                        </article>
-                        <!-- /ARTICLE -->
-                    </div>
-                    <!-- /Column 2 -->
-                </div>
-                <!-- /row -->
-
-                <!-- row -->
-                <div class="row">
+            <!-- ROW -->
+            <div class="row">
+                <!-- Main Column -->
+                <div class="col-md-12">
                     <!-- section title -->
-                    <div class="col-md-12">
-                        <div class="section-title">
-                            <h2 class="title">News</h2>
-                        </div>
+                    <div class="section-title">
+                        <h2 class="title">Hôm nay bạn đọc gì?</h2>
+                        <!-- tab nav -->
+                        <ul class="tab-nav pull-right">
+                            <li class="active"><a data-toggle="tab" href="#all">All</a></li>
+                            @foreach($categories as $category)
+                                <li><a data-toggle="tab" href="#{{$category->slug}}">{{$category->name}}</a></li>
+                            @endforeach
+                        </ul>
+                        <!-- /tab nav -->
                     </div>
                     <!-- /section title -->
 
-                    <!-- Column 1 -->
-                    <div class="col-md-6 col-sm-6">
-                        <!-- ARTICLE -->
-                        <article class="article">
-                            <div class="article-img">
-                                <a href="#">
-                                    <img src="{{ asset('front-end theme/img/img-sm-3.jpg')}}" alt="">
-                                </a>
-                                <ul class="article-info">
-                                    <li class="article-type"><i class="fa fa-camera"></i></li>
-                                </ul>
+                    <!-- Tab content -->
+                    <div class="tab-content">
+                        <!-- All-->
+                        <div id="all" class="tab-pane fade in active">
+                            <!-- row -->
+                            <div class="row">
+                            @foreach($allFirst4 as $allFirst4)
+                                <!-- Column 1 -->
+                                    <div class="col-md-3 col-sm-6">
+                                        <!-- ARTICLE -->
+                                        <article class="article">
+                                            <div class="article-img">
+                                                <a href="{{getCategoryColumn($allFirst4->category_id,'slug')}}">
+                                                    <div class="today-thumb">
+                                                        <img src="{{$allFirst4->thumbnail}}"
+                                                             alt="{{$allFirst4->title}}">
+                                                    </div>
+                                                </a>
+                                                <ul class="article-info">
+                                                    <li class="article-type">
+                                                        <i class="fa {{getIconBySlug(getCategoryColumn($allFirst4->category_id,'slug'))}}"></i>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="article-body">
+                                                <h4 class="article-title">
+                                                    <a href="{{getCategoryColumn($allFirst4->category_id,'slug')}}">
+                                                        {{str_limit($allFirst4->title, 40)}}
+                                                    </a>
+                                                </h4>
+                                                <ul class="article-meta">
+                                                    <li>
+                                                        <i class="fa fa-clock-o"></i>
+                                                        {{\Carbon\Carbon::parse($allFirst4->created_at)->format('F d, Y')}}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </article>
+                                        <!-- /ARTICLE -->
+                                    </div>
+                                    <!-- /Column 1 -->
+                                @endforeach
                             </div>
-                            <div class="article-body">
-                                <h3 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h3>
-                                <ul class="article-meta">
-                                    <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                    <li><i class="fa fa-comments"></i> 33</li>
-                                </ul>
-                                <p>Populo tritani laboramus ex mei, no eum iuvaret ceteros euripidis, ne alia sadipscing
-                                    mei. Te inciderint cotidieque pro, ei iisque docendi qui, ne accommodare
-                                    theophrastus reprehendunt vel. Et commodo menandri eam.</p>
-                            </div>
-                        </article>
-                        <!-- /ARTICLE -->
-                    </div>
-                    <!-- /Column 1 -->
+                            <!-- /row -->
+                        </div>
+                        <!-- /All -->
 
-                    <!-- /Column 2 -->
-                    <div class="col-md-6 col-sm-6">
-                        <!-- ARTICLE -->
-                        <article class="article">
-                            <div class="article-img">
-                                <a href="#">
-                                    <img src="{{ asset('front-end theme/img/img-sm-4.jpg')}}" alt="">
-                                </a>
-                                <ul class="article-info">
-                                    <li class="article-type"><i class="fa fa-camera"></i></li>
-                                </ul>
+                        <!-- Mobile-->
+                        <div id="mobile" class="tab-pane fade in">
+                            <!-- row -->
+                            <div class="row">
+                            @foreach($mobileFirst4 as $mobileFirst4)
+                                <!-- Column 1 -->
+                                    <div class="col-md-3 col-sm-6">
+                                        <!-- ARTICLE -->
+                                        <article class="article">
+                                            <div class="article-img">
+                                                <a href="{{getCategoryColumn($mobileFirst4->category_id,'slug')}}">
+                                                    <div class="today-thumb">
+                                                        <img src="{{$mobileFirst4->thumbnail}}"
+                                                             alt="{{$mobileFirst4->title}}">
+                                                    </div>
+                                                </a>
+                                                <ul class="article-info">
+                                                    <li class="article-type">
+                                                        <i class="fa {{getIconBySlug(getCategoryColumn($mobileFirst4->category_id,'slug'))}}"></i>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="article-body">
+                                                <h4 class="article-title">
+                                                    <a href="{{getCategoryColumn($mobileFirst4->category_id,'slug')}}">
+                                                        {{str_limit($mobileFirst4->title, 40)}}
+                                                    </a>
+                                                </h4>
+                                                <ul class="article-meta">
+                                                    <li>
+                                                        <i class="fa fa-clock-o"></i>
+                                                        {{\Carbon\Carbon::parse($mobileFirst4->created_at)->format('F d, Y')}}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </article>
+                                        <!-- /ARTICLE -->
+                                    </div>
+                                    <!-- /Column 1 -->
+                                @endforeach
                             </div>
-                            <div class="article-body">
-                                <h3 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h3>
-                                <ul class="article-meta">
-                                    <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                    <li><i class="fa fa-comments"></i> 33</li>
-                                </ul>
-                                <p>Populo tritani laboramus ex mei, no eum iuvaret ceteros euripidis, ne alia sadipscing
-                                    mei. Te inciderint cotidieque pro, ei iisque docendi qui, ne accommodare
-                                    theophrastus reprehendunt vel. Et commodo menandri eam.</p>
+                            <!-- /row -->
+                        </div>
+                        <!-- /Mobile -->
+
+                        <!-- CNTT-->
+                        <div id="cong-nghe-thong-tin" class="tab-pane fade in">
+                            <!-- row -->
+                            <div class="row">
+                            @foreach($cnttFirst4 as $cnttFirst4)
+                                <!-- Column 1 -->
+                                    <div class="col-md-3 col-sm-6">
+                                        <!-- ARTICLE -->
+                                        <article class="article">
+                                            <div class="article-img">
+                                                <a href="{{getCategoryColumn($cnttFirst4->category_id,'slug')}}">
+                                                    <div class="today-thumb">
+                                                        <img src="{{$cnttFirst4->thumbnail}}"
+                                                             alt="{{$cnttFirst4->title}}">
+                                                    </div>
+                                                </a>
+                                                <ul class="article-info">
+                                                    <li class="article-type">
+                                                        <i class="fa {{getIconBySlug(getCategoryColumn($cnttFirst4->category_id,'slug'))}}"></i>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="article-body">
+                                                <h4 class="article-title">
+                                                    <a href="{{getCategoryColumn($cnttFirst4->category_id,'slug')}}">
+                                                        {{str_limit($cnttFirst4->title, 40)}}
+                                                    </a>
+                                                </h4>
+                                                <ul class="article-meta">
+                                                    <li>
+                                                        <i class="fa fa-clock-o"></i>
+                                                        {{\Carbon\Carbon::parse($cnttFirst4->created_at)->format('F d, Y')}}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </article>
+                                        <!-- /ARTICLE -->
+                                    </div>
+                                    <!-- /Column 1 -->
+                                @endforeach
                             </div>
-                        </article>
-                        <!-- /ARTICLE -->
+                            <!-- /row -->
+                        </div>
+                        <!-- /CNTT -->
+
+                        <!-- Internet-->
+                        <div id="internet" class="tab-pane fade in">
+                            <!-- row -->
+                            <div class="row">
+                            @foreach($internetFirst4 as $internetFirst4)
+                                <!-- Column 1 -->
+                                    <div class="col-md-3 col-sm-6">
+                                        <!-- ARTICLE -->
+                                        <article class="article">
+                                            <div class="article-img">
+                                                <a href="{{getCategoryColumn($internetFirst4->category_id,'slug')}}">
+                                                    <div class="today-thumb">
+                                                        <img src="{{$internetFirst4->thumbnail}}"
+                                                             alt="{{$internetFirst4->title}}">
+                                                    </div>
+                                                </a>
+                                                <ul class="article-info">
+                                                    <li class="article-type">
+                                                        <i class="fa {{getIconBySlug(getCategoryColumn($internetFirst4->category_id,'slug'))}}"></i>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="article-body">
+                                                <h4 class="article-title">
+                                                    <a href="{{getCategoryColumn($internetFirst4->category_id,'slug')}}">
+                                                        {{str_limit($internetFirst4->title, 40)}}
+                                                    </a>
+                                                </h4>
+                                                <ul class="article-meta">
+                                                    <li>
+                                                        <i class="fa fa-clock-o"></i>
+                                                        {{\Carbon\Carbon::parse($internetFirst4->created_at)->format('F d, Y')}}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </article>
+                                        <!-- /ARTICLE -->
+                                    </div>
+                                    <!-- /Column 1 -->
+                                @endforeach
+                            </div>
+                            <!-- /row -->
+                        </div>
+                        <!-- /Internet -->
+
+                        <!-- Kham pha-->
+                        <div id="kham-pha" class="tab-pane fade in">
+                            <!-- row -->
+                            <div class="row">
+                            @foreach($khamPhaFirst4 as $khamPhaFirst4)
+                                <!-- Column 1 -->
+                                    <div class="col-md-3 col-sm-6">
+                                        <!-- ARTICLE -->
+                                        <article class="article">
+                                            <div class="article-img">
+                                                <a href="{{getCategoryColumn($khamPhaFirst4->category_id,'slug')}}">
+                                                    <div class="today-thumb">
+                                                        <img src="{{$khamPhaFirst4->thumbnail}}"
+                                                             alt="{{$khamPhaFirst4->title}}">
+                                                    </div>
+                                                </a>
+                                                <ul class="article-info">
+                                                    <li class="article-type">
+                                                        <i class="fa {{getIconBySlug(getCategoryColumn($khamPhaFirst4->category_id,'slug'))}}"></i>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="article-body">
+                                                <h4 class="article-title">
+                                                    <a href="{{getCategoryColumn($khamPhaFirst4->category_id,'slug')}}">
+                                                        {{str_limit($khamPhaFirst4->title, 40)}}
+                                                    </a>
+                                                </h4>
+                                                <ul class="article-meta">
+                                                    <li>
+                                                        <i class="fa fa-clock-o"></i>
+                                                        {{\Carbon\Carbon::parse($khamPhaFirst4->created_at)->format('F d, Y')}}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </article>
+                                        <!-- /ARTICLE -->
+                                    </div>
+                                    <!-- /Column 1 -->
+                                @endforeach
+                            </div>
+                            <!-- /row -->
+                        </div>
+                        <!-- /Kham pha -->
                     </div>
-                    <!-- /Column 2 -->
+                    <!-- /tab content -->
                 </div>
-                <!-- /row -->
-
-                <!-- row -->
-                <div class="row">
-                    <!-- Column 1 -->
-                    <div class="col-md-4 col-sm-4">
-                        <!-- ARTICLE -->
-                        <article class="article">
-                            <div class="article-img">
-                                <a href="#">
-                                    <img src="{{ asset('front-end theme/img/img-md-1.jpg')}}" alt="">
-                                </a>
-                                <ul class="article-info">
-                                    <li class="article-type"><i class="fa fa-file-text"></i></li>
-                                </ul>
-                            </div>
-                            <div class="article-body">
-                                <h4 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h4>
-                                <ul class="article-meta">
-                                    <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                    <li><i class="fa fa-comments"></i> 33</li>
-                                </ul>
-                            </div>
-                        </article>
-                        <!-- /ARTICLE -->
-                    </div>
-                    <!-- /Column 1 -->
-
-                    <!-- Column 2 -->
-                    <div class="col-md-4 col-sm-4">
-                        <!-- ARTICLE -->
-                        <article class="article">
-                            <div class="article-img">
-                                <a href="#">
-                                    <img src="{{ asset('front-end theme/img/img-md-2.jpg')}}" alt="">
-                                </a>
-                                <ul class="article-info">
-                                    <li class="article-type"><i class="fa fa-file-text"></i></li>
-                                </ul>
-                            </div>
-                            <div class="article-body">
-                                <h4 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h4>
-                                <ul class="article-meta">
-                                    <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                    <li><i class="fa fa-comments"></i> 33</li>
-                                </ul>
-                            </div>
-                        </article>
-                        <!-- /ARTICLE -->
-                    </div>
-                    <!-- /Column 2 -->
-
-                    <!-- Column 3 -->
-                    <div class="col-md-4 col-sm-4">
-                        <!-- ARTICLE -->
-                        <article class="article">
-                            <div class="article-img">
-                                <a href="#">
-                                    <img src="{{ asset('front-end theme/img/img-md-3.jpg')}}" alt="">
-                                </a>
-                                <ul class="article-info">
-                                    <li class="article-type"><i class="fa fa-file-text"></i></li>
-                                </ul>
-                            </div>
-                            <div class="article-body">
-                                <h4 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h4>
-                                <ul class="article-meta">
-                                    <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                    <li><i class="fa fa-comments"></i> 33</li>
-                                </ul>
-                            </div>
-                        </article>
-                        <!-- /ARTICLE -->
-                    </div>
-                    <!-- /Column 3 -->
-                </div>
-                <!-- /row -->
+                <!-- /Main Column -->
             </div>
-            <!-- /Main Column -->
-
-            <!-- Aside Column -->
-            <div class="col-md-4">
-                <!-- Ad widget -->
-                <div class="widget center-block hidden-xs">
-                    <img class="center-block" src="{{ asset('front-end theme/img/ad-1.jpg')}}" alt="">
-                </div>
-                <!-- /Ad widget -->
-
-                <!-- social widget -->
-                <div class="widget social-widget">
-                    <div class="widget-title">
-                        <h2 class="title">Stay Connected</h2>
-                    </div>
-                    <ul>
-                        <li><a href="#" class="facebook"><i class="fa fa-facebook"></i><br><span>Facebook</span></a>
-                        </li>
-                        <li><a href="#" class="twitter"><i class="fa fa-twitter"></i><br><span>Twitter</span></a></li>
-                        <li><a href="#" class="google"><i class="fa fa-google"></i><br><span>Google+</span></a></li>
-                        <li><a href="#" class="instagram"><i class="fa fa-instagram"></i><br><span>Instagram</span></a>
-                        </li>
-                        <li><a href="#" class="youtube"><i class="fa fa-youtube"></i><br><span>Youtube</span></a></li>
-                        <li><a href="#" class="rss"><i class="fa fa-rss"></i><br><span>RSS</span></a></li>
-                    </ul>
-                </div>
-                <!-- /social widget -->
-
-                <!-- subscribe widget -->
-                <div class="widget subscribe-widget">
-                    <div class="widget-title">
-                        <h2 class="title">Subscribe to Newslatter</h2>
-                    </div>
-                    <form>
-                        <input class="input" type="email" placeholder="Enter Your Email">
-                        <button class="input-btn">Subscribe</button>
-                    </form>
-                </div>
-                <!-- /subscribe widget -->
-
-                <!-- article widget -->
-                <div class="widget">
-                    <div class="widget-title">
-                        <h2 class="title">Most Read</h2>
-                    </div>
-
-                    <!-- owl carousel 3 -->
-                    <div id="owl-carousel-3" class="owl-carousel owl-theme center-owl-nav">
-                        <!-- ARTICLE -->
-                        <article class="article">
-                            <div class="article-img">
-                                <a href="#">
-                                    <img src="{{ asset('front-end theme/img/img-md-3.jpg')}}" alt="">
-                                </a>
-                                <ul class="article-info">
-                                    <li class="article-type"><i class="fa fa-file-text"></i></li>
-                                </ul>
-                            </div>
-                            <div class="article-body">
-                                <h4 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h4>
-                                <ul class="article-meta">
-                                    <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                    <li><i class="fa fa-comments"></i> 33</li>
-                                </ul>
-                            </div>
-                        </article>
-                        <!-- /ARTICLE -->
-
-                        <!-- ARTICLE -->
-                        <article class="article">
-                            <div class="article-img">
-                                <a href="#">
-                                    <img src="{{ asset('front-end theme/img/img-md-4.jpg')}}" alt="">
-                                </a>
-                                <ul class="article-info">
-                                    <li class="article-type"><i class="fa fa-file-text"></i></li>
-                                </ul>
-                            </div>
-                            <div class="article-body">
-                                <h4 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h4>
-                                <ul class="article-meta">
-                                    <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                    <li><i class="fa fa-comments"></i> 33</li>
-                                </ul>
-                            </div>
-                        </article>
-                        <!-- /ARTICLE -->
-                    </div>
-                    <!-- /owl carousel 3 -->
-
-                    <!-- ARTICLE -->
-                    <article class="article widget-article">
-                        <div class="article-img">
-                            <a href="#">
-                                <img src="{{ asset('front-end theme/img/img-widget-1.jpg')}}" alt="">
-                            </a>
-                        </div>
-                        <div class="article-body">
-                            <h4 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h4>
-                            <ul class="article-meta">
-                                <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                <li><i class="fa fa-comments"></i> 33</li>
-                            </ul>
-                        </div>
-                    </article>
-                    <!-- /ARTICLE -->
-
-                    <!-- ARTICLE -->
-                    <article class="article widget-article">
-                        <div class="article-img">
-                            <a href="#">
-                                <img src="{{ asset('front-end theme/img/img-widget-2.jpg')}}" alt="">
-                            </a>
-                        </div>
-                        <div class="article-body">
-                            <h4 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h4>
-                            <ul class="article-meta">
-                                <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                <li><i class="fa fa-comments"></i> 33</li>
-                            </ul>
-                        </div>
-                    </article>
-                    <!-- /ARTICLE -->
-
-                    <!-- ARTICLE -->
-                    <article class="article widget-article">
-                        <div class="article-img">
-                            <a href="#">
-                                <img src="{{ asset('front-end theme/img/img-widget-3.jpg')}}" alt="">
-                            </a>
-                        </div>
-                        <div class="article-body">
-                            <h4 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h4>
-                            <ul class="article-meta">
-                                <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                <li><i class="fa fa-comments"></i> 33</li>
-                            </ul>
-                        </div>
-                    </article>
-                    <!-- /ARTICLE -->
-                </div>
-                <!-- /article widget -->
-            </div>
-            <!-- /Aside Column -->
+            <!-- /ROW -->
         </div>
-        <!-- /ROW -->
+        <!-- /CONTAINER -->
     </div>
-    <!-- /CONTAINER -->
-</div>
-<!-- /SECTION -->
+    <!-- /SECTION -->
 
-<!-- AD SECTION -->
-<div class="visible-lg visible-md">
-    <img class="center-block" src="{{ asset('front-end theme/img/ad-3.jpg')}}" alt="">
-</div>
-<!-- /AD SECTION -->
-
-<!-- SECTION -->
-<div class="section">
-    <!-- CONTAINER -->
-    <div class="container">
-        <!-- ROW -->
-        <div class="row">
-            <!-- Main Column -->
-            <div class="col-md-12">
-                <!-- section title -->
-                <div class="section-title">
-                    <h2 class="title">Popular Video</h2>
-                    <div id="nav-carousel-2" class="custom-owl-nav pull-right"></div>
-                </div>
-                <!-- /section title -->
-
-                <!-- owl carousel 2 -->
-                <div id="owl-carousel-2" class="owl-carousel owl-theme">
-                    <!-- ARTICLE -->
-                    <article class="article thumb-article">
-                        <div class="article-img">
-                            <img src="{{ asset('front-end theme/img/img-thumb-1.jpg')}}" alt="">
-                        </div>
-                        <div class="article-body">
-                            <ul class="article-info">
-                                <li class="article-category"><a href="#">News</a></li>
-                                <li class="article-type"><i class="fa fa-video-camera"></i></li>
-                            </ul>
-                            <h3 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h3>
-                            <ul class="article-meta">
-                                <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                <li><i class="fa fa-comments"></i> 33</li>
-                            </ul>
-                        </div>
-                    </article>
-                    <!-- /ARTICLE -->
-
-                    <!-- ARTICLE -->
-                    <article class="article thumb-article">
-                        <div class="article-img">
-                            <img src="{{ asset('front-end theme/img/img-thumb-2.jpg')}}" alt="">
-                        </div>
-                        <div class="article-body">
-                            <ul class="article-info">
-                                <li class="article-category"><a href="#">News</a></li>
-                                <li class="article-type"><i class="fa fa-video-camera"></i></li>
-                            </ul>
-                            <h3 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h3>
-                            <ul class="article-meta">
-                                <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                <li><i class="fa fa-comments"></i> 33</li>
-                            </ul>
-                        </div>
-                    </article>
-                    <!-- /ARTICLE -->
-
-                    <!-- ARTICLE -->
-                    <article class="article thumb-article">
-                        <div class="article-img">
-                            <img src="{{ asset('front-end theme/img/img-thumb-3.jpg')}}" alt="">
-                        </div>
-                        <div class="article-body">
-                            <ul class="article-info">
-                                <li class="article-category"><a href="#">News</a></li>
-                                <li class="article-type"><i class="fa fa-video-camera"></i></li>
-                            </ul>
-                            <h3 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h3>
-                            <ul class="article-meta">
-                                <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                <li><i class="fa fa-comments"></i> 33</li>
-                            </ul>
-                        </div>
-                    </article>
-                    <!-- /ARTICLE -->
-
-                    <!-- ARTICLE -->
-                    <article class="article thumb-article">
-                        <div class="article-img">
-                            <img src="{{ asset('front-end theme/img/img-thumb-4.jpg')}}" alt="">
-                        </div>
-                        <div class="article-body">
-                            <ul class="article-info">
-                                <li class="article-category"><a href="#">News</a></li>
-                                <li class="article-type"><i class="fa fa-video-camera"></i></li>
-                            </ul>
-                            <h3 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h3>
-                            <ul class="article-meta">
-                                <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                <li><i class="fa fa-comments"></i> 33</li>
-                            </ul>
-                        </div>
-                    </article>
-                    <!-- /ARTICLE -->
-                </div>
-                <!-- /owl carousel 2 -->
-            </div>
-            <!-- /Main Column -->
-        </div>
-        <!-- /ROW -->
-    </div>
-    <!-- /CONTAINER -->
-</div>
-<!-- /SECTION -->
-
-<!-- SECTION -->
-<div class="section">
-    <!-- CONTAINER -->
-    <div class="container">
-        <!-- ROW -->
-        <div class="row">
-            <!-- Main Column -->
-            <div class="col-md-8">
-                <!-- section title -->
-                <div class="section-title">
-                    <h2 class="title">Popular Posts</h2>
-                </div>
-                <!-- /section title -->
-
-                <!-- ARTICLE -->
-                <article class="article row-article">
-                    <div class="article-img">
-                        <a href="#">
-                            <img src="{{ asset('front-end theme/img/img-md-1.jpg')}}" alt="">
-                        </a>
-                    </div>
-                    <div class="article-body">
-                        <ul class="article-info">
-                            <li class="article-category"><a href="#">News</a></li>
-                            <li class="article-type"><i class="fa fa-file-text"></i></li>
-                        </ul>
-                        <h3 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h3>
-                        <ul class="article-meta">
-                            <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                            <li><i class="fa fa-comments"></i> 33</li>
-                        </ul>
-                        <p>Populo tritani laboramus ex mei, no eum iuvaret ceteros euripidis, ne alia sadipscing mei. Te
-                            inciderint cotidieque pro, ei iisque docendi qui.</p>
-                    </div>
-                </article>
-                <!-- /ARTICLE -->
-
-                <!-- ARTICLE -->
-                <article class="article row-article">
-                    <div class="article-img">
-                        <a href="#">
-                            <img src="{{ asset('front-end theme/img/img-md-2.jpg')}}" alt="">
-                        </a>
-                    </div>
-                    <div class="article-body">
-                        <ul class="article-info">
-                            <li class="article-category"><a href="#">News</a></li>
-                            <li class="article-type"><i class="fa fa-file-text"></i></li>
-                        </ul>
-                        <h3 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h3>
-                        <ul class="article-meta">
-                            <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                            <li><i class="fa fa-comments"></i> 33</li>
-                        </ul>
-                        <p>Populo tritani laboramus ex mei, no eum iuvaret ceteros euripidis, ne alia sadipscing mei. Te
-                            inciderint cotidieque pro, ei iisque docendi qui.</p>
-                    </div>
-                </article>
-                <!-- /ARTICLE -->
-
-                <!-- ARTICLE -->
-                <article class="article row-article">
-                    <div class="article-img">
-                        <a href="#">
-                            <img src="{{ asset('front-end theme/img/img-md-3.jpg')}}" alt="">
-                        </a>
-                    </div>
-                    <div class="article-body">
-                        <ul class="article-info">
-                            <li class="article-category"><a href="#">News</a></li>
-                            <li class="article-type"><i class="fa fa-file-text"></i></li>
-                        </ul>
-                        <h3 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h3>
-                        <ul class="article-meta">
-                            <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                            <li><i class="fa fa-comments"></i> 33</li>
-                        </ul>
-                        <p>Populo tritani laboramus ex mei, no eum iuvaret ceteros euripidis, ne alia sadipscing mei. Te
-                            inciderint cotidieque pro, ei iisque docendi qui.</p>
-                    </div>
-                </article>
-                <!-- /ARTICLE -->
-
-                <!-- ARTICLE -->
-                <article class="article row-article">
-                    <div class="article-img">
-                        <a href="#">
-                            <img src="{{ asset('front-end theme/img/img-md-4.jpg')}}" alt="">
-                        </a>
-                    </div>
-                    <div class="article-body">
-                        <ul class="article-info">
-                            <li class="article-category"><a href="#">News</a></li>
-                            <li class="article-type"><i class="fa fa-file-text"></i></li>
-                        </ul>
-                        <h3 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h3>
-                        <ul class="article-meta">
-                            <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                            <li><i class="fa fa-comments"></i> 33</li>
-                        </ul>
-                        <p>Populo tritani laboramus ex mei, no eum iuvaret ceteros euripidis, ne alia sadipscing mei. Te
-                            inciderint cotidieque pro, ei iisque docendi qui.</p>
-                    </div>
-                </article>
-                <!-- /ARTICLE -->
-
-                <!-- pagination -->
-                <div class="article-pagination">
-                    <ul>
-                        <li class="active"><a href="#" class="active">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                    </ul>
-                </div>
-                <!-- /pagination -->
-            </div>
-            <!-- /Main Column -->
-
-            <!-- Aside Column -->
-            <div class="col-md-4">
-                <!-- article widget -->
-                <div class="widget">
-                    <div class="widget-title">
-                        <h2 class="title">Featured Posts</h2>
-                    </div>
-
-                    <!-- owl carousel 4 -->
-                    <div id="owl-carousel-4" class="owl-carousel owl-theme">
-                        <!-- ARTICLE -->
-                        <article class="article thumb-article">
-                            <div class="article-img">
-                                <img src="{{ asset('front-end theme/img/img-thumb-1.jpg')}}" alt="">
-                            </div>
-                            <div class="article-body">
-                                <ul class="article-info">
-                                    <li class="article-category"><a href="#">News</a></li>
-                                    <li class="article-type"><i class="fa fa-video-camera"></i></li>
-                                </ul>
-                                <h3 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h3>
-                                <ul class="article-meta">
-                                    <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                    <li><i class="fa fa-comments"></i> 33</li>
-                                </ul>
-                            </div>
-                        </article>
-                        <!-- /ARTICLE -->
-
-                        <!-- ARTICLE -->
-                        <article class="article thumb-article">
-                            <div class="article-img">
-                                <img src="{{ asset('front-end theme/img/img-thumb-2.jpg')}}" alt="">
-                            </div>
-                            <div class="article-body">
-                                <ul class="article-info">
-                                    <li class="article-category"><a href="#">News</a></li>
-                                    <li class="article-type"><i class="fa fa-video-camera"></i></li>
-                                </ul>
-                                <h3 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h3>
-                                <ul class="article-meta">
-                                    <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                    <li><i class="fa fa-comments"></i> 33</li>
-                                </ul>
-                            </div>
-                        </article>
-                        <!-- /ARTICLE -->
-                    </div>
-                    <!-- /owl carousel 4 -->
-                </div>
-                <!-- /article widget -->
-
-                <!-- galery widget -->
-                <div class="widget galery-widget">
-                    <div class="widget-title">
-                        <h2 class="title">Flickr Photos</h2>
-                    </div>
-                    <ul>
-                        <li><a href="#"><img src="{{ asset('front-end theme/img/img-widget-3.jpg')}}" alt=""></a></li>
-                        <li><a href="#"><img src="{{ asset('front-end theme/img/img-widget-4.jpg')}}" alt=""></a></li>
-                        <li><a href="#"><img src="{{ asset('front-end theme/img/img-widget-5.jpg')}}" alt=""></a></li>
-                        <li><a href="#"><img src="{{ asset('front-end theme/img/img-widget-6.jpg')}}" alt=""></a></li>
-                        <li><a href="#"><img src="{{ asset('front-end theme/img/img-widget-7.jpg')}}" alt=""></a></li>
-                        <li><a href="#"><img src="{{ asset('front-end theme/img/img-widget-8.jpg')}}" alt=""></a></li>
-                        <li><a href="#"><img src="{{ asset('front-end theme/img/img-widget-9.jpg')}}" alt=""></a></li>
-                        <li><a href="#"><img src="{{ asset('front-end theme/img/img-widget-10.jpg')}}" alt=""></a></li>
-                    </ul>
-                </div>
-                <!-- /galery widget -->
-
-                <!-- tweets widget -->
-                <div class="widget tweets-widget">
-                    <div class="widget-title">
-                        <h2 class="title">Recent Tweets</h2>
-                    </div>
-                    <ul>
-                        <li class="tweet">
-                            <i class="fa fa-twitter"></i>
-                            <div class="tweet-body">
-                                <p><a href="#">@magnews</a> Populo tritani laboramus ex mei, no eum iuvaret ceteros
-                                    euripidis <a href="#">https://t.co/DwsTbsmxTP</a></p>
-                            </div>
-                        </li>
-                        <li class="tweet">
-                            <i class="fa fa-twitter"></i>
-                            <div class="tweet-body">
-                                <p><a href="#">@magnews</a> Populo tritani laboramus ex mei, no eum iuvaret ceteros
-                                    euripidis <a href="#">https://t.co/DwsTbsmxTP</a></p>
-                            </div>
-                        </li>
-                        <li class="tweet">
-                            <i class="fa fa-twitter"></i>
-                            <div class="tweet-body">
-                                <p><a href="#">@magnews</a> Populo tritani laboramus ex mei, no eum iuvaret ceteros
-                                    euripidis <a href="#">https://t.co/DwsTbsmxTP</a></p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /tweets widget -->
-            </div>
-            <!-- /Aside Column -->
-        </div>
-        <!-- /ROW -->
-    </div>
-    <!-- /CONTAINER -->
-</div>
-<!-- /SECTION -->
-
-<!-- FOOTER -->
-<footer id="footer">
-    <!-- Top Footer -->
-    <div id="top-footer" class="section">
+    <!-- SECTION -->
+    <div class="section">
         <!-- CONTAINER -->
         <div class="container">
             <!-- ROW -->
             <div class="row">
-                <!-- Column 1 -->
-                <div class="col-md-4">
-                    <!-- footer about -->
-                    <div class="footer-widget about-widget">
-                        <div class="footer-logo">
-                            <a href="#" class="logo"><img src="{{ asset('front-end theme/img/logo-alt.png')}}" alt=""></a>
-                            <p>Populo tritani laboramus ex mei, no eum iuvaret ceteros euripidis, ne alia sadipscing
-                                mei. Te inciderint cotidieque pro, ei iisque docendi qui.</p>
-                        </div>
+                <!-- Main Column -->
+                <div class="col-md-12">
+                    <!-- section title -->
+                    <div class="section-title">
+                    <h2 class="title">Tin tức</h2>
                     </div>
-                    <!-- /footer about -->
-
-                    <!-- footer social -->
-                    <div class="footer-widget social-widget">
-                        <div class="widget-title">
-                            <h3 class="title">Follow Us</h3>
-                        </div>
-                        <ul>
-                            <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#" class="google"><i class="fa fa-google"></i></a></li>
-                            <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#" class="youtube"><i class="fa fa-youtube"></i></a></li>
-                            <li><a href="#" class="rss"><i class="fa fa-rss"></i></a></li>
-                        </ul>
-                    </div>
-                    <!-- /footer social -->
-
-                    <!-- footer subscribe -->
-                    <div class="footer-widget subscribe-widget">
-                        <div class="widget-title">
-                            <h2 class="title">Subscribe to Newslatter</h2>
-                        </div>
-                        <form>
-                            <input class="input" type="email" placeholder="Enter Your Email">
-                            <button class="input-btn">Subscribe</button>
-                        </form>
-                    </div>
-                    <!-- /footer subscribe -->
-                </div>
-                <!-- /Column 1 -->
-
-                <!-- Column 2 -->
-                <div class="col-md-4">
-                    <!-- footer article -->
-                    <div class="footer-widget">
-                        <div class="widget-title">
-                            <h2 class="title">Featured Posts</h2>
-                        </div>
-
+                    <!-- /section title -->
+                    <div class="infinite-scroll">
+                    @foreach($posts as $post)
                         <!-- ARTICLE -->
-                        <article class="article widget-article">
-                            <div class="article-img">
-                                <a href="#">
-                                    <img src="{{ asset('front-end theme/img/img-widget-1.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="article-body">
-                                <h4 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h4>
-                                <ul class="article-meta">
-                                    <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                    <li><i class="fa fa-comments"></i> 33</li>
-                                </ul>
-                            </div>
-                        </article>
-                        <!-- /ARTICLE -->
-
-                        <!-- ARTICLE -->
-                        <article class="article widget-article">
-                            <div class="article-img">
-                                <a href="#">
-                                    <img src="{{ asset('front-end theme/img/img-widget-2.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="article-body">
-                                <h4 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h4>
-                                <ul class="article-meta">
-                                    <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                    <li><i class="fa fa-comments"></i> 33</li>
-                                </ul>
-                            </div>
-                        </article>
-                        <!-- /ARTICLE -->
-
-                        <!-- ARTICLE -->
-                        <article class="article widget-article">
-                            <div class="article-img">
-                                <a href="#">
-                                    <img src="{{ asset('front-end theme/img/img-widget-3.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="article-body">
-                                <h4 class="article-title"><a href="#">Duis urbanitas eam in, tempor consequat.</a></h4>
-                                <ul class="article-meta">
-                                    <li><i class="fa fa-clock-o"></i> January 31, 2017</li>
-                                    <li><i class="fa fa-comments"></i> 33</li>
-                                </ul>
-                            </div>
-                        </article>
-                        <!-- /ARTICLE -->
-                    </div>
-                    <!-- /footer article -->
-                </div>
-                <!-- /Column 2 -->
-
-                <!-- Column 3 -->
-                <div class="col-md-4">
-                    <!-- footer galery -->
-                    <div class="footer-widget galery-widget">
-                        <div class="widget-title">
-                            <h2 class="title">Flickr Photos</h2>
-                        </div>
-                        <ul>
-                            <li><a href="#"><img src="{{ asset('front-end theme/img/img-widget-3.jpg')}}" alt=""></a></li>
-                            <li><a href="#"><img src="{{ asset('front-end theme/img/img-widget-4.jpg')}}" alt=""></a></li>
-                            <li><a href="#"><img src="{{ asset('front-end theme/img/img-widget-5.jpg')}}" alt=""></a></li>
-                            <li><a href="#"><img src="{{ asset('front-end theme/img/img-widget-6.jpg')}}" alt=""></a></li>
-                            <li><a href="#"><img src="{{ asset('front-end theme/img/img-widget-7.jpg')}}" alt=""></a></li>
-                            <li><a href="#"><img src="{{ asset('front-end theme/img/img-widget-8.jpg')}}" alt=""></a></li>
-                            <li><a href="#"><img src="{{ asset('front-end theme/img/img-widget-9.jpg')}}" alt=""></a></li>
-                            <li><a href="#"><img src="{{ asset('front-end theme/img/img-widget-10.jpg')}}" alt=""></a></li>
-                        </ul>
-                    </div>
-                    <!-- /footer galery -->
-
-                    <!-- footer tweets -->
-                    <div class="footer-widget tweets-widget">
-                        <div class="widget-title">
-                            <h2 class="title">Recent Tweets</h2>
-                        </div>
-                        <ul>
-                            <li class="tweet">
-                                <i class="fa fa-twitter"></i>
-                                <div class="tweet-body">
-                                    <p><a href="#">@magnews</a> Populo tritani laboramus ex mei, no eum iuvaret ceteros
-                                        euripidis <a href="#">https://t.co/DwsTbsmxTP</a></p>
+                            <article class="article row-article">
+                                <div class="article-img">
+                                    <a href="{{ action('FrontEndController@postDetail', ['category' => getCategoryColumn($post->category_id,'slug'), 'slug' => $post->slug]) }}">
+                                        <div class="article-post homeArticle-thumb">
+                                            <img src="{{$post->thumbnail}}" alt="{{$post->title}}">
+                                        </div>
+                                    </a>
                                 </div>
-                            </li>
-                        </ul>
+                                <div class="article-body">
+                                    <ul class="article-info">
+                                        <li class="article-category">
+                                            <a href="{{ action('FrontEndController@category', ['category' => getCategoryColumn($post->category_id,'slug')])}}">
+                                                {{getCategoryColumn($post->category_id,'name')}}
+                                            </a>
+                                        </li>
+                                        <li class="article-type">
+                                            <i class="fa {{getIconBySlug(getCategoryColumn($post->category_id,'slug'))}}"></i>
+                                        </li>
+                                    </ul>
+                                    <h4 class="article-title">
+                                        <a href="{{ action('FrontEndController@postDetail', ['category' => getCategoryColumn($post->category_id,'slug'), 'slug' => $post->slug]) }}">{{$post->title}}
+                                        </a>
+                                    </h4>
+                                    <ul class="article-meta">
+                                        <li>
+                                            <i class="fa fa-clock-o"></i>
+                                            {{\Carbon\Carbon::parse($post->created_at)->format('F d, Y')}}
+                                        </li>
+                                        {{--<li><i class="fa fa-comments"></i> 33</li>--}}
+                                    </ul>
+                                    {!!str_limit($post->description, 120)!!}
+                                </div>
+                            </article>
+                            <!-- /ARTICLE -->
+                        @endforeach
+                        {{$posts->links()}}
                     </div>
-                    <!-- /footer tweets -->
                 </div>
-                <!-- /Column 3 -->
+                <!-- /Main Column -->
+
             </div>
             <!-- /ROW -->
         </div>
         <!-- /CONTAINER -->
     </div>
-    <!-- /Top Footer -->
+    <!-- /SECTION -->
 
-    <!-- Bottom Footer -->
-    <div id="bottom-footer" class="section">
-        <!-- CONTAINER -->
-        <div class="container">
-            <!-- ROW -->
-            <div class="row">
-                <!-- footer links -->
-                <div class="col-md-6 col-md-push-6">
-                    <ul class="footer-links">
-                        <li><a href="#">About us</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Advertisement</a></li>
-                        <li><a href="#">Privacy</a></li>
-                    </ul>
-                </div>
-                <!-- /footer links -->
+    {{--<!-- SECTION -->--}}
+    {{--<div class="section">--}}
+    {{--<!-- CONTAINER -->--}}
+    {{--<div class="container">--}}
+    {{--<!-- ROW -->--}}
+    {{--<div class="row">--}}
+    {{--<!-- Main Column -->--}}
+    {{--<div class="col-md-12">--}}
+    {{--<!-- section title -->--}}
+    {{--<div class="section-title">--}}
+    {{--<h2 class="title">Tin mới nhất</h2>--}}
+    {{--<div id="nav-carousel-2" class="custom-owl-nav pull-right"></div>--}}
+    {{--</div>--}}
+    {{--<!-- /section title -->--}}
 
-                <!-- footer copyright -->
-                <div class="col-md-6 col-md-pull-6">
-                    <div class="footer-copyright">
-								<span><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i
-                                            class="fa fa-heart-o" aria-hidden="true"></i> by <a
-                                            href="https://colorlib.com" target="_blank">Colorlib</a>
-                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span>
-                    </div>
-                </div>
-                <!-- /footer copyright -->
-            </div>
-            <!-- /ROW -->
-        </div>
-        <!-- /CONTAINER -->
-    </div>
-    <!-- /Bottom Footer -->
-</footer>
-<!-- /FOOTER -->
+    {{--<!-- owl carousel 2 -->--}}
+    {{--<div id="owl-carousel-2" class="owl-carousel owl-theme">--}}
+    {{--@foreach($featurePostAlls as $featurePostAll)--}}
+    {{--<!-- ARTICLE -->--}}
+    {{--<article class="article thumb-article">--}}
+    {{--<div class="article-img newestPost-thumb">--}}
+    {{--<img src="{{$featurePostAll->thumbnail}}" alt="{{$featurePostAll->title}}">--}}
+    {{--</div>--}}
+    {{--<div class="article-body">--}}
+    {{--<ul class="article-info">--}}
+    {{--<li class="article-category">--}}
+    {{--<a href="{{getCategoryColumn($featurePostAll->category_id,'slug')}}">--}}
+    {{--{{getCategoryColumn($featurePostAll->category_id,'name')}}--}}
+    {{--</a>--}}
+    {{--</li>--}}
+    {{--<li class="article-type">--}}
+    {{--<i class="fa {{getIconBySlug(getCategoryColumn($featurePostAll->category_id,'slug'))}}"></i>--}}
+    {{--</li>--}}
+    {{--</ul>--}}
+    {{--<h4 class="article-title">--}}
+    {{--<a href="{{ action('FrontEndController@postDetail', ['category' => getCategoryColumn($featurePostAll->category_id,'slug'), 'slug' => $featurePostAll->slug]) }}">--}}
+    {{--{{str_limit($featurePostAll->title, 50)}}--}}
+    {{--</a>--}}
+    {{--</h4>--}}
+    {{--<ul class="article-meta">--}}
+    {{--<li>--}}
+    {{--<i class="fa fa-clock-o"></i>--}}
+    {{--{{\Carbon\Carbon::parse($featurePostAll->created_at)->format('F d, Y')}}--}}
+    {{--</li>--}}
+    {{--</ul>--}}
+    {{--</div>--}}
+    {{--</article>--}}
+    {{--<!-- /ARTICLE -->--}}
+    {{--@endforeach--}}
+    {{--</div>--}}
+    {{--<!-- /owl carousel 2 -->--}}
+    {{--</div>--}}
+    {{--<!-- /Main Column -->--}}
+    {{--</div>--}}
+    {{--<!-- /ROW -->--}}
+    {{--</div>--}}
+    {{--<!-- /CONTAINER -->--}}
+    {{--</div>--}}
+    {{--<!-- /SECTION -->--}}
 
-<!-- Back to top -->
-<div id="back-to-top"></div>
-<!-- Back to top -->
+    @include('layouts.frontend.footer')
+
+    <!-- Back to top -->
+    <div id="back-to-top"></div>
+    <!-- Back to top -->
 @endsection
