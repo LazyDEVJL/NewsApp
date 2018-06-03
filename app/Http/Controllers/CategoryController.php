@@ -44,7 +44,7 @@ class CategoryController extends Controller
             'sl_active'=>'required|integer',
             'sl_parent_id'=>'required'
         ];
-        
+
         $messages = [
             'txt_name.required'=>'Category\'s name is required',
             'txt_slug.required'=>'Category\'s slug is required',

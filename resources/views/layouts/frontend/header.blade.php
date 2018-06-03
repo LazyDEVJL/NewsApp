@@ -3,7 +3,7 @@
     <div id="center-header">
         <div class="container">
             <div class="header-logo">
-                <a href="#" class="logo"><img src="{{asset('front-end theme/img/logo.png')}}" alt=""></a>
+                <a href="{{route('home')}}" class="logo"><img src="{{asset('front-end theme/img/logo.png')}}" alt=""></a>
             </div>
             <div class="header-ads">
                 <img class="center-block" src="{{asset('front-end theme/img/ad-2.jpg')}}" alt="">

@@ -73,7 +73,7 @@
                                         <!-- ARTICLE -->
                                         <article class="article">
                                             <div class="article-img">
-                                                <a href="{{getCategoryColumn($allFirst4->category_id,'slug')}}">
+                                                <a href="{{ action('FrontEndController@postDetail', ['category' => getCategoryColumn($allFirst4->category_id,'slug'), 'slug' => $allFirst4->slug]) }}">
                                                     <div class="today-thumb">
                                                         <img src="{{$allFirst4->thumbnail}}"
                                                              alt="{{$allFirst4->title}}">
@@ -87,7 +87,7 @@
                                             </div>
                                             <div class="article-body">
                                                 <h4 class="article-title">
-                                                    <a href="{{getCategoryColumn($allFirst4->category_id,'slug')}}">
+                                                    <a href="{{ action('FrontEndController@postDetail', ['category' => getCategoryColumn($allFirst4->category_id,'slug'), 'slug' => $allFirst4->slug]) }}">
                                                         {{str_limit($allFirst4->title, 40)}}
                                                     </a>
                                                 </h4>
@@ -118,7 +118,7 @@
                                         <!-- ARTICLE -->
                                         <article class="article">
                                             <div class="article-img">
-                                                <a href="{{getCategoryColumn($mobileFirst4->category_id,'slug')}}">
+                                                <a href="{{ action('FrontEndController@postDetail', ['category' => getCategoryColumn($mobileFirst4->category_id,'slug'), 'slug' => $mobileFirst4->slug]) }}">
                                                     <div class="today-thumb">
                                                         <img src="{{$mobileFirst4->thumbnail}}"
                                                              alt="{{$mobileFirst4->title}}">
@@ -132,7 +132,7 @@
                                             </div>
                                             <div class="article-body">
                                                 <h4 class="article-title">
-                                                    <a href="{{getCategoryColumn($mobileFirst4->category_id,'slug')}}">
+                                                    <a href="{{ action('FrontEndController@postDetail', ['category' => getCategoryColumn($mobileFirst4->category_id,'slug'), 'slug' => $mobileFirst4->slug]) }}">
                                                         {{str_limit($mobileFirst4->title, 40)}}
                                                     </a>
                                                 </h4>
@@ -163,7 +163,7 @@
                                         <!-- ARTICLE -->
                                         <article class="article">
                                             <div class="article-img">
-                                                <a href="{{getCategoryColumn($cnttFirst4->category_id,'slug')}}">
+                                                <a href="{{ action('FrontEndController@postDetail', ['category' => getCategoryColumn($cnttFirst4->category_id,'slug'), 'slug' => $cnttFirst4->slug]) }}">
                                                     <div class="today-thumb">
                                                         <img src="{{$cnttFirst4->thumbnail}}"
                                                              alt="{{$cnttFirst4->title}}">
@@ -177,7 +177,7 @@
                                             </div>
                                             <div class="article-body">
                                                 <h4 class="article-title">
-                                                    <a href="{{getCategoryColumn($cnttFirst4->category_id,'slug')}}">
+                                                    <a href="{{ action('FrontEndController@postDetail', ['category' => getCategoryColumn($cnttFirst4->category_id,'slug'), 'slug' => $cnttFirst4->slug]) }}">
                                                         {{str_limit($cnttFirst4->title, 40)}}
                                                     </a>
                                                 </h4>
@@ -208,7 +208,7 @@
                                         <!-- ARTICLE -->
                                         <article class="article">
                                             <div class="article-img">
-                                                <a href="{{getCategoryColumn($internetFirst4->category_id,'slug')}}">
+                                                <a href="{{ action('FrontEndController@postDetail', ['category' => getCategoryColumn($internetFirst4->category_id,'slug'), 'slug' => $internetFirst4->slug]) }}">
                                                     <div class="today-thumb">
                                                         <img src="{{$internetFirst4->thumbnail}}"
                                                              alt="{{$internetFirst4->title}}">
@@ -222,7 +222,7 @@
                                             </div>
                                             <div class="article-body">
                                                 <h4 class="article-title">
-                                                    <a href="{{getCategoryColumn($internetFirst4->category_id,'slug')}}">
+                                                    <a href="{{ action('FrontEndController@postDetail', ['category' => getCategoryColumn($internetFirst4->category_id,'slug'), 'slug' => $internetFirst4->slug]) }}">
                                                         {{str_limit($internetFirst4->title, 40)}}
                                                     </a>
                                                 </h4>
@@ -253,7 +253,7 @@
                                         <!-- ARTICLE -->
                                         <article class="article">
                                             <div class="article-img">
-                                                <a href="{{getCategoryColumn($khamPhaFirst4->category_id,'slug')}}">
+                                                <a href="{{ action('FrontEndController@postDetail', ['category' => getCategoryColumn($khamPhaFirst4->category_id,'slug'), 'slug' => $khamPhaFirst4->slug]) }}">
                                                     <div class="today-thumb">
                                                         <img src="{{$khamPhaFirst4->thumbnail}}"
                                                              alt="{{$khamPhaFirst4->title}}">
@@ -267,7 +267,7 @@
                                             </div>
                                             <div class="article-body">
                                                 <h4 class="article-title">
-                                                    <a href="{{getCategoryColumn($khamPhaFirst4->category_id,'slug')}}">
+                                                    <a href="{{ action('FrontEndController@postDetail', ['category' => getCategoryColumn($khamPhaFirst4->category_id,'slug'), 'slug' => $khamPhaFirst4->slug]) }}">
                                                         {{str_limit($khamPhaFirst4->title, 40)}}
                                                     </a>
                                                 </h4>
@@ -308,7 +308,7 @@
                 <div class="col-md-12">
                     <!-- section title -->
                     <div class="section-title">
-                    <h2 class="title">Tin tức</h2>
+                        <h2 class="title">Tin tức</h2>
                     </div>
                     <!-- /section title -->
                     <div class="infinite-scroll">
